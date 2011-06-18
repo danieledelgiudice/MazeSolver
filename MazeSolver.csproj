@@ -59,7 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="RecursiveMazeBuilder.cs" />
+    <Compile Include="Builder\RecursiveMazeBuilder.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,12 +68,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AStarMazeSolver.cs" />
-    <Compile Include="Cell.cs" />
-    <Compile Include="CellStatus.cs" />
-    <Compile Include="EllerMazeBuilder.cs" />
-    <Compile Include="IMazeBuilder.cs" />
-    <Compile Include="IMazeSolver.cs" />
+    <Compile Include="Solver\AStarMazeSolver.cs" />
+    <Compile Include="Common\Cell.cs" />
+    <Compile Include="Builder\IMazeBuilder.cs" />
+    <Compile Include="Solver\IMazeSolver.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -97,7 +95,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

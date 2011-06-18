@@ -1,53 +1,49 @@
-﻿<Window x:Class="MazeSolver.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:extToolkit="clr-namespace:XamlGeneratedNamespace;assembly=WPFToolkit.Extended" xmlns:Controls="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit.Extended" Title="MainWindow" Height="409" Width="389">
-    <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="60"/>
-        </Grid.RowDefinitions>
-        
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Viewbox Margin="10" Grid.ColumnSpan="3" x:Name="vb" Stretch="Uniform">
-            <Image x:Name="image">
-                <Image.Source>
-                    <DrawingImage>
-                        <DrawingImage.Drawing>
-                            <DrawingGroup>
-                                <GeometryDrawing x:Name="mazeDrawing">
-                                    <GeometryDrawing.Pen>
-                                        <Pen Brush="Blue" DashCap="Square"/>
-                                    </GeometryDrawing.Pen>
-                                </GeometryDrawing>
+﻿<Window x:Class="MazeSolver.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:extToolkit="clr-namespace:XamlGeneratedNamespace;assembly=WPFToolkit.Extended" xmlns:Controls="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit.Extended" Title="MainWindow" Height="409" Width="389">
+	<Grid Background="White">
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition Height="60" />
+		</Grid.RowDefinitions>
 
-                                <GeometryDrawing x:Name="solutionDrawing">
-                                    <GeometryDrawing.Pen>
-                                        <Pen Brush="Red" DashCap="Square"/>
-                                    </GeometryDrawing.Pen>
-                                </GeometryDrawing>
-                            </DrawingGroup>
-                           
-                        </DrawingImage.Drawing>
-                    </DrawingImage>
-                </Image.Source>
-            </Image>
-        </Viewbox>
-        <Button Grid.Row="1" Grid.Column="1" Click="GenerateButtonClick" Height="30" Width="80" Content="Generate"/>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" >
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Larghezza" VerticalAlignment="Center"/>
-                <Controls:IntegerUpDown VerticalAlignment="Center" Minimum="10" Maximum="1000" x:Name="slider" Margin="5" Value="10"/>
-            </StackPanel>
-            <CheckBox Content="Save image" HorizontalAlignment="Center" x:Name="saveImagesCheckbox" Margin="5"/>
-        </StackPanel>
-        <Button Grid.Row="1" Grid.Column="2" Click="SolveButtonClick" Height="30" Width="80" Content="Solve"/>
-        
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<Viewbox Margin="10" Grid.ColumnSpan="3" x:Name="vb" Stretch="Uniform">
+			<Image x:Name="image">
+				<Image.Source>
+					<DrawingImage>
+						<DrawingImage.Drawing>
+							<DrawingGroup>
+								<GeometryDrawing x:Name="mazeDrawing">
+									<GeometryDrawing.Pen>
+										<Pen Brush="Blue" DashCap="Square" />
+									</GeometryDrawing.Pen>
+								</GeometryDrawing>
+
+								<GeometryDrawing x:Name="solutionDrawing">
+									<GeometryDrawing.Pen>
+										<Pen Brush="Red" DashCap="Square" />
+									</GeometryDrawing.Pen>
+								</GeometryDrawing>
+							</DrawingGroup>
+
+						</DrawingImage.Drawing>
+					</DrawingImage>
+				</Image.Source>
+			</Image>
+		</Viewbox>
+		<Button Grid.Row="1" Grid.Column="1" Click="GenerateButtonClick" Height="30" Width="80" Content="Generate" />
+		<StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Larghezza" VerticalAlignment="Center" />
+				<Controls:IntegerUpDown VerticalAlignment="Center" Minimum="10" Maximum="1000" x:Name="slider" Margin="5" Value="10" />
+			</StackPanel>
+			<CheckBox Content="Save image" HorizontalAlignment="Center" x:Name="saveImagesCheckbox" Margin="5" />
+		</StackPanel>
+		<Button Grid.Row="1" Grid.Column="2" Click="SolveButtonClick" Height="30" Width="80" Content="Solve" />
 
 
-    </Grid>
+	</Grid>
 </Window>
