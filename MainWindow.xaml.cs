@@ -6,6 +6,9 @@ using System.Windows.Media.Imaging;
 using MazeSolver.Builder;
 using MazeSolver.Common;
 using MazeSolver.Solver;
+using System;
+using System.ComponentModel;
+using System.Windows.Threading;
 
 namespace MazeSolver
 {
@@ -17,10 +20,30 @@ namespace MazeSolver
         private int _height;
         private Cell[,] _maze;
         private int _width;
+        private IList<Cell> _solution;
 
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public void ExecuteBackground(Action task, Action taskDone)
+        {
+            solveButton.IsEnabled = false;
+            generateButton.IsEnabled = false;
+            progressBar.IsIndeterminate = true;
+
+            var worker = new BackgroundWorker();
+            worker.DoWork += (o, e) => task();
+            worker.RunWorkerCompleted += ((o, e) => Dispatcher.BeginInvoke(new Action(() =>
+                                                        {
+                                                            taskDone();
+                                                            solveButton.IsEnabled = true;
+                                                            generateButton.IsEnabled = true;
+                                                            progressBar.IsIndeterminate = false;
+                                                        }), DispatcherPriority.Render));
+
+            worker.RunWorkerAsync();
         }
 
         private void GenerateButtonClick(object sender, RoutedEventArgs e)
@@ -29,26 +52,26 @@ namespace MazeSolver
             image.Width = _width*10;
             image.Height = _height*10;
 
-            IMazeBuilder builder = new RecursiveMazeBuilder();
-            _maze = builder.Build(_width, _height);
-
-            DrawMaze();
+            IMazeBuilder builder = new DFSMazeBuilder();
+            ExecuteBackground(() => _maze = builder.Build(_width, _height),
+                              DrawMaze);
         }
 
         private void SolveButtonClick(object sender, RoutedEventArgs e)
         {
-            IMazeSolver solver = new AStarMazeSolver();
+            IMazeSolver solver = new BFSMazeSolver();
 
             Cell startingPoint = _maze[0, 0];
             Cell endingPoint = _maze[_width - 1, _height - 1];
-
-            List<Cell> solution = solver.Solve(_maze, startingPoint, endingPoint);
-            DrawSolution(solution);
+            
+            ExecuteBackground(() => _solution = solver.Solve(_maze, startingPoint, endingPoint),
+                              () => DrawSolution(_solution));
         }
 
         private void DrawMaze()
         {
             mazeDrawing.Geometry = null;
+            solutionDrawing.Geometry = null;
 
             double xFactor = image.Width/_width;
             double yFactor = image.Height/_height;

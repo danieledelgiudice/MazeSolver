@@ -8,6 +8,7 @@ namespace MazeSolver.Solver
     {
         #region Implementation of IMazeSolver
 
+        //Do not use this implementation... it's so slow!
         public List<Cell> Solve(Cell[,] maze, Cell startingCell, Cell endingCell)
         {
             var open = new List<Cell>();
@@ -56,13 +57,14 @@ namespace MazeSolver.Solver
             }
 
             var solution = RebuildPath(endingCell);
-            solution.Reverse();
 
             foreach (var cell in maze)
                 cell.ClearAdditionalValues();
 
             return solution;
         }
+
+        #endregion
 
         private static List<Cell> RebuildPath(Cell endingCell)
         {
@@ -75,10 +77,10 @@ namespace MazeSolver.Solver
                 current = current["parent"] as Cell;
             } while (current != null);
 
+            ret.Reverse();
+
             return ret;
         }
-
-        #endregion
 
         private static int EstimateDistance(Cell cell, Cell endingCell)
         {

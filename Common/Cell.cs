@@ -12,6 +12,21 @@ namespace MazeSolver.Common
         public Cell North { get; set; }
         public Cell South { get; set; }
 
+        public IEnumerable<Cell> Neighbors
+        {
+            get
+            {
+                if (East  != null)
+                    yield return East;
+                if (West  != null)
+                    yield return West;
+                if (North != null)
+                    yield return North;
+                if (South != null)
+                    yield return South;
+            }
+        }
+
         public Cell(int x, int y)
         {
             X = x;
