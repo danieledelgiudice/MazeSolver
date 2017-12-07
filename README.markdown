@@ -1,6 +1,8 @@
 MazeSolver
 ===========
 
+![MazeSolver](https://github.com/D4n13le/MazeSolver/blob/master/Screenshots/application.png?raw=true)
+
 MazeSolver is an application that can create and solve mazes.
 Two implementation of MazeSolvers are provided (one using BFS and the other using A*),
 and it's easy to extend the interface IMazeSolver to implement your own solving strategy.
